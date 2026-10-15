@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-15T19:46:04.369Z",
+  "url": "http://localhost:4173",
+  "browser": "Chromium (headless) + Service Worker",
+  "firstLoad": {
+    "ttfb": 20,
+    "domContentLoaded": 74,
+    "loadEvent": 906,
+    "wallMs": 3466,
+    "images": {
+      "total": 5,
+      "loaded": 5
+    },
+    "imageSources": [
+      {
+        "name": "max-payne-1-keyart-800.webp",
+        "fromSW": false,
+        "fromCache": false,
+        "status": 200
+      },
+      {
+        "name": "max-payne-2-keyart-400.webp",
+        "fromSW": false,
+        "fromCache": false,
+        "status": 200
+      },
+      {
+        "name": "max-payne-1-keyart-400.webp",
+        "fromSW": false,
+        "fromCache": false,
+        "status": 200
+      },
+      {
+        "name": "max-payne-3-keyart-800.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      },
+      {
+        "name": "max-payne-artwork-800.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      }
+    ]
+  },
+  "warmLoad": {
+    "ttfb": [
+      4,
+      4,
+      4
+    ],
+    "domContentLoaded": [
+      36,
+      32,
+      33
+    ],
+    "loadEvent": [
+      37,
+      33,
+      34
+    ],
+    "wallMs": [
+      847,
+      844,
+      843
+    ],
+    "images": [
+      {
+        "total": 5,
+        "loaded": 5
+      },
+      {
+        "total": 5,
+        "loaded": 5
+      },
+      {
+        "total": 5,
+        "loaded": 5
+      }
+    ],
+    "imageSources": [
+      {
+        "name": "max-payne-1-keyart-800.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      },
+      {
+        "name": "max-payne-1-keyart-400.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      },
+      {
+        "name": "max-payne-2-keyart-400.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      },
+      {
+        "name": "max-payne-3-keyart-800.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      },
+      {
+        "name": "max-payne-artwork-800.webp",
+        "fromSW": true,
+        "fromCache": true,
+        "status": 200
+      }
+    ],
+    "imagesFromSW": 5,
+    "imagesFromNetwork": 0
+  },
+  "offline": {
+    "succeeded": true,
+    "loadEvent": 40,
+    "images": {
+      "total": 5,
+      "loaded": 5
+    },
+    "imagesFromSW": 5
+  }
+}

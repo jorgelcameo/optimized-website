@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A noir fan tribute to Max Payne — the pain of a man caught in a conspiracy of violence.">
+  <meta name="theme-color" content="#240d12">
+  <title>MAX PAYNE — A Noir Tribute</title>
+  <link rel="preload" href="assets/fonts/max-payne-logo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/images/max-payne-1-keyart-1600.webp" as="image" type="image/webp" imagesrcset="assets/images/max-payne-1-keyart-400.webp 400w, assets/images/max-payne-1-keyart-800.webp 800w, assets/images/max-payne-1-keyart-1600.webp 1600w" imagesizes="100vw">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23240d12'/><text y='75' x='50' text-anchor='middle' font-size='70' fill='%23af1020' font-family='monospace' font-weight='bold'>MP</text></svg>">
+</head>
+<body>
+
+  <canvas id="weather" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="#top">MAX&nbsp;PAYNE</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#saga">The Saga</a>
+      <a href="#games">Games</a>
+      <a href="#quotes">Monologues</a>
+    </nav>
+    <button id="weather-toggle" class="weather-toggle" type="button" aria-pressed="false" aria-label="Toggle weather between rain and snow">
+      <span class="weather-toggle__icon" id="weather-icon" aria-hidden="true">☔</span>
+      <span class="weather-toggle__label" id="weather-label">RAIN</span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" aria-label="Max Payne">
+      <picture class="hero__bg">
+        <source type="image/webp" srcset="assets/images/max-payne-1-keyart-400.webp 400w, assets/images/max-payne-1-keyart-800.webp 800w, assets/images/max-payne-1-keyart-1600.webp 1600w" sizes="100vw">
+        <img src="assets/images/max-payne-1-keyart-1600.jpg" srcset="assets/images/max-payne-1-keyart-800.jpg 800w, assets/images/max-payne-1-keyart-1600.jpg 1600w" sizes="100vw" alt="Max Payne key art — a lone figure in a darkened doorway" width="1600" height="900" fetchpriority="high" decoding="async">
+      </picture>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__kicker">A FAN TRIBUTE</p>
+        <h1 class="hero__title"><span>MAX</span><span class="hero__title-red">PAYNE</span></h1>
+        <p class="hero__tagline">"New York died on Christmas Eve. I walked into the cold to keep it from taking me too."</p>
+        <p class="hero__meta">2001 &middot; REMEDY / ROCKSTAR &middot; NOIR ACTION</p>
+        <a class="btn" href="#saga">ENTER THE COLD</a>
+      </div>
+    </section>
+
+    <section id="saga" class="section saga">
+      <div class="section__inner">
+        <h2 class="section__title"><span class="panel-num">01</span>THE SAGA</h2>
+        <div class="saga__grid">
+          <div class="comic-panel comic-panel--narration">
+            <p>Three games. One man. A trail of bodies through the smoking ruins of his own life.</p>
+          </div>
+          <div class="comic-panel comic-panel--narration">
+            <p>New York detective Max Payne loses his wife and baby daughter to a mob conspiracy's Valkyr experiment — then spends years drowning the grief in bitter justice and cheap painkillers.</p>
+          </div>
+          <div class="comic-panel comic-panel--narration comic-panel--wide">
+            <p>From the frozen streets of Manhattan to the favelas of São Paulo, Max carves through conspiracies like a bullet through fog — leaving only dead bodies and monologues that read like hard-boiled poetry.</p>
+          </div>
+        </div>
+        <blockquote class="pull-quote">
+          <p>"I had a dream of my wife. She was screaming at me. She was accusing me of cheating on her."</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="games" class="section games">
+      <div class="section__inner">
+        <h2 class="section__title"><span class="panel-num">02</span>THE GAMES</h2>
+        <div class="games__grid">
+
+          <article class="game-card">
+            <div class="game-card__art">
+              <picture>
+                <source type="image/webp" srcset="assets/images/max-payne-1-keyart-400.webp 400w, assets/images/max-payne-1-keyart-800.webp 800w" sizes="(max-width: 700px) 100vw, 50vw">
+                <img src="assets/images/max-payne-1-keyart-800.jpg" alt="Max Payne (2001) key art" width="800" height="450" loading="lazy" decoding="async">
+              </picture>
+              <span class="game-card__year">2001</span>
+            </div>
+            <div class="game-card__body">
+              <h3>MAX PAYNE</h3>
+              <p class="game-card__studio">Remedy Entertainment &middot; Rockstar Games</p>
+              <p>The original descent. Comic-book cutscenes, bullet-time born here, and a New York drowning in snow and sleaze. A murder mystery drenched in Norse mythology and painkiller addiction.</p>
+              <p class="game-card__line">"The rain was like a thin curtain of needles."</p>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-card__art">
+              <picture>
+                <source type="image/webp" srcset="assets/images/max-payne-2-keyart-400.webp 400w, assets/images/max-payne-2-keyart-800.webp 800w" sizes="(max-width: 700px) 100vw, 50vw">
+                <img src="assets/images/max-payne-2-keyart-800.jpg" alt="Max Payne 2 (2003) key art" width="800" height="450" loading="lazy" decoding="async">
+              </picture>
+              <span class="game-card__year">2003</span>
+            </div>
+            <div class="game-card__body">
+              <h3>MAX PAYNE 2</h3>
+              <p class="game-card__studio">Remedy Entertainment &middot; Rockstar Games</p>
+              <p>A dark crime noir about love and death — Max falls for Mona Sax, a contract killer on the wrong side of the job. Leaner, meaner, and still one of the best shooters ever written.</p>
+              <p class="game-card__line">"I was a cop. Once. It seemed a lifetime ago."</p>
+            </div>
+          </article>
+
+          <article class="game-card game-card--wide">
+            <div class="game-card__art">
+              <picture>
+                <source type="image/webp" srcset="assets/images/max-payne-3-keyart-400.webp 400w, assets/images/max-payne-3-keyart-800.webp 800w, assets/images/max-payne-3-keyart-1600.webp 1600w" sizes="100vw">
+                <img src="assets/images/max-payne-3-keyart-800.jpg" srcset="assets/images/max-payne-3-keyart-800.jpg 800w, assets/images/max-payne-3-keyart-1600.jpg 1600w" sizes="(max-width: 700px) 100vw, 100vw" alt="Max Payne 3 (2012) key art" width="800" height="450" loading="lazy" decoding="async">
+              </picture>
+              <span class="game-card__year">2012</span>
+            </div>
+            <div class="game-card__body">
+              <h3>MAX PAYNE 3</h3>
+              <p class="game-card__studio">Rockstar Studios</p>
+              <p>Brazil. Broken body, broken liver, same old ghosts. Max drinks himself through a private-security gig in São Paulo until the bullets drag him back to who he really is. The most brutal game in the trilogy — and the most human.</p>
+              <p class="game-card__line">"I was a cop. Once. It seemed a lifetime ago. I wasn't drinking for entertainment."</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="quotes" class="section quotes">
+      <div class="section__inner">
+        <h2 class="section__title"><span class="panel-num">03</span>MONOLOGUES</h2>
+        <div class="quotes__grid">
+          <blockquote class="speech-bubble speech-bubble--thought">
+            <p>"My wife and child were dead. I had nothing left except a gun and a bad habit."</p>
+          </blockquote>
+          <blockquote class="speech-bubble speech-bubble--speech">
+            <p>"It was a cold business, and I was the best there was at it."</p>
+          </blockquote>
+          <blockquote class="speech-bubble speech-bubble--thought">
+            <p>"Painkillers kept me sane. The world kept trying to take that away."</p>
+          </blockquote>
+          <blockquote class="speech-bubble speech-bubble--speech">
+            <p>"The twin moons of my bloody past hung low and huge in the sky."</p>
+          </blockquote>
+          <blockquote class="speech-bubble speech-bubble--thought speech-bubble--wide">
+            <p>"I had a dream of my wife. She was pregnant, and I was scared. It was a good dream. Then I woke up."</p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section artwork" aria-label="Artwork">
+      <div class="section__inner">
+        <h2 class="section__title"><span class="panel-num">04</span>THE LOOK</h2>
+        <figure class="artwork__frame">
+          <picture>
+            <source type="image/webp" srcset="assets/images/max-payne-artwork-400.webp 400w, assets/images/max-payne-artwork-800.webp 800w, assets/images/max-payne-artwork-1600.webp 1600w" sizes="(max-width: 1600px) 100vw, 1600px">
+            <img src="assets/images/max-payne-artwork-800.jpg" srcset="assets/images/max-payne-artwork-800.jpg 800w, assets/images/max-payne-artwork-1600.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px" alt="Max Payne comic-style artwork" width="1600" height="900" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>"There is a choice we all have to make — between what is right and what is easy."</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>MAX PAYNE is a trademark of its respective owners. This is a non-commercial fan tribute.</p>
+    <p class="site-footer__small">Built for performance &middot; Served from cache after first request &middot; <span id="cache-status">checking cache…</span></p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+    }
+  </script>
+</body>
+</html>
