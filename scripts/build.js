@@ -5,7 +5,8 @@ const { loadEnv } = require("./load-env");
 const ROOT = path.join(__dirname, "..");
 const SRC = path.join(ROOT, "src");
 const DIST = path.join(ROOT, "dist");
-const env = loadEnv();
+// .env supplies local defaults; real environment variables (CI secrets) win.
+const env = { ...loadEnv(), ...process.env };
 
 const ASSETS_BASE_URL = (env.ASSETS_BASE_URL || "").replace(/\/+$/, "");
 const IMAGE_PREFIX = "assets/images/";
