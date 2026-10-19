@@ -2,3 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+CONTRAST.md
+DEPLOY.md
+PERFORMANCE.md
+SPEC.md
