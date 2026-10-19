@@ -59,8 +59,29 @@ jobs:
         with:
           path: dist
 
+  upload-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.S3_REGION || 'us-east-2' }}
+
+      - name: Upload source images and audio to S3
+        run: npm run deploy:assets
+        env:
+          S3_BUCKET: ${{ vars.S3_BUCKET || 'max-payne-assets' }}
+          S3_REGION: ${{ vars.S3_REGION || 'us-east-2' }}
+          S3_KEY_PREFIX: ${{ vars.S3_KEY_PREFIX || 'assets/images' }}
+          S3_AUDIO_KEY_PREFIX: ${{ vars.S3_AUDIO_KEY_PREFIX || 'assets/audio' }}
+
   deploy:
-    needs: build
+    needs: [build, upload-assets]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

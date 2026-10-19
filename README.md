@@ -73,7 +73,12 @@ npm run build && npm run measure  # build S3-backed dist and measure
 
 ## GitHub Pages
 
-A workflow (`.github/workflows/deploy.yml`) builds `dist/` from `src/` and deploys to Pages. It reads `secrets.ASSETS_BASE_URL` and the `QUOTE_API_URL` repository variable; configure both in repository settings.
+A workflow (`.github/workflows/deploy.yml`) builds `dist/` from `src/`, uploads `src/assets/images/` and `src/assets/audio/` to S3, then deploys to Pages. Configure these repository settings:
+
+- Secrets: `ASSETS_BASE_URL`, `AWS_ACCESS_KEY_ID`, and `AWS_SECRET_ACCESS_KEY`. The AWS keys should belong to an IAM user allowed to list the target bucket and upload objects under the configured asset prefixes.
+- Variables: `QUOTE_API_URL`, `S3_BUCKET` (defaults to `max-payne-assets`), and `S3_REGION` (defaults to `us-east-2`). Optional `S3_KEY_PREFIX` and `S3_AUDIO_KEY_PREFIX` default to `assets/images` and `assets/audio`.
+
+The upload job uses GitHub Actions secrets for AWS credentials; local `npm run deploy:assets` continues to use `.env` and `AWS_PROFILE`.
 
 ## Notes
 

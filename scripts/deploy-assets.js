@@ -4,7 +4,8 @@ const path = require("path");
 const { loadEnv } = require("./load-env");
 
 const ROOT = path.join(__dirname, "..");
-const env = loadEnv();
+// Local .env values are defaults; CI-provided environment variables take precedence.
+const env = { ...loadEnv(), ...process.env };
 
 const bucket = env.S3_BUCKET;
 const region = env.S3_REGION || "us-east-1";
