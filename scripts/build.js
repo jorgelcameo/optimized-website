@@ -10,6 +10,8 @@ const env = { ...loadEnv(), ...process.env };
 
 const ASSETS_BASE_URL = (env.ASSETS_BASE_URL || "").replace(/\/+$/, "");
 const IMAGE_PREFIX = "assets/images/";
+const AUDIO_PREFIX = "assets/audio/";
+const QUOTE_API_URL = (env.QUOTE_API_URL || "").replace(/\/+$/, "");
 
 const REWRITE_EXTENSIONS = new Set([".html", ".css", ".js"]);
 
@@ -19,8 +21,9 @@ function copyDir(from, to) {
     const src = path.join(from, entry.name);
     const dest = path.join(to, entry.name);
     if (entry.isDirectory()) {
-      // Images live on S3 in production — do not ship local copies.
-      if (path.relative(SRC, src) === "assets" + path.sep + "images") continue;
+      // Media lives on S3 in production — do not ship local copies.
+      const relative = path.relative(SRC, src);
+      if (relative === path.join("assets", "images") || relative === path.join("assets", "audio")) continue;
       copyDir(src, dest);
     } else {
       fs.copyFileSync(src, dest);
@@ -39,16 +42,31 @@ function rewriteFiles(dir) {
     if (!REWRITE_EXTENSIONS.has(path.extname(file.name))) continue;
     let text = fs.readFileSync(p, "utf8");
     const before = text;
-    const needle = new RegExp(IMAGE_PREFIX.replace("/", "\\/"), "g");
-    const count = (text.match(needle) || []).length;
-    if (count) {
-      text = text.replace(needle, `${ASSETS_BASE_URL}/${IMAGE_PREFIX}`);
+    for (const prefix of [IMAGE_PREFIX, AUDIO_PREFIX]) {
+      const needle = new RegExp(prefix.replace("/", "\\/"), "g");
+      const count = (text.match(needle) || []).length;
+      if (ASSETS_BASE_URL && count) {
+        text = text.replace(needle, `${ASSETS_BASE_URL}/${prefix}`);
+        totalRewrites += count;
+        console.log(`  rewrote ${count} asset URL(s) in ${path.relative(ROOT, p)}`);
+      }
+    }
+    if (text !== before) {
       fs.writeFileSync(p, text);
-      totalRewrites += count;
-      console.log(`  rewrote ${count} asset URL(s) in ${path.relative(ROOT, p)}`);
     }
   }
   return totalRewrites;
+}
+
+function configureQuoteApi(dir) {
+  const htmlPath = path.join(dir, "index.html");
+  let html = fs.readFileSync(htmlPath, "utf8");
+  const escapedUrl = QUOTE_API_URL.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  html = html.replace(
+    /(<meta name="quote-api-url" content=")[^"]*(">)/,
+    `$1${escapedUrl}$2`
+  );
+  fs.writeFileSync(htmlPath, html);
 }
 
 fs.rmSync(DIST, { recursive: true, force: true });
@@ -61,4 +79,6 @@ if (ASSETS_BASE_URL) {
 } else {
   console.log("ASSETS_BASE_URL empty — shipping local assets (no rewrite).");
 }
+configureQuoteApi(DIST);
+console.log(QUOTE_API_URL ? `quote API: ${QUOTE_API_URL}` : "QUOTE_API_URL empty — quote feature stays disconnected.");
 console.log(`Built -> ${path.relative(ROOT, DIST)}`);

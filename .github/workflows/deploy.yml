@@ -32,6 +32,7 @@ jobs:
       - name: Build (rewrite image URLs to S3)
         env:
           ASSETS_BASE_URL: ${{ secrets.ASSETS_BASE_URL }}
+          QUOTE_API_URL: ${{ vars.QUOTE_API_URL }}
         run: |
           # Fallback to .env if secret not set
           node -e "
@@ -47,6 +48,7 @@ jobs:
               }
             }
             if (!process.env.ASSETS_BASE_URL) throw new Error('ASSETS_BASE_URL missing');
+            if (!process.env.QUOTE_API_URL) throw new Error('QUOTE_API_URL missing');
           " && node scripts/build.js
 
       - name: Add .nojekyll
