@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A noir fan tribute to Max Payne — the pain of a man caught in a conspiracy of violence.">
   <meta name="theme-color" content="#240d12">
+  <meta name="quote-api-url" content="">
   <title>MAX PAYNE — A Noir Tribute</title>
   <link rel="preload" href="assets/fonts/max-payne-logo.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -23,7 +24,7 @@
     <nav class="nav" aria-label="Main">
       <a href="#saga">The Saga</a>
       <a href="#games">Games</a>
-      <a href="#quotes">Monologues</a>
+      <a href="#quotes">Maxpaynize</a>
     </nav>
     <button id="weather-toggle" class="weather-toggle" type="button" aria-pressed="false" aria-label="Toggle weather between rain and snow">
       <span class="weather-toggle__icon" id="weather-icon" aria-hidden="true">☔</span>
@@ -127,23 +128,19 @@
 
     <section id="quotes" class="section quotes">
       <div class="section__inner">
-        <h2 class="section__title"><span class="panel-num">03</span>MONOLOGUES</h2>
-        <div class="quotes__grid">
-          <blockquote class="speech-bubble speech-bubble--thought">
-            <p>"My wife and child were dead. I had nothing left except a gun and a bad habit."</p>
-          </blockquote>
-          <blockquote class="speech-bubble speech-bubble--speech">
-            <p>"It was a cold business, and I was the best there was at it."</p>
-          </blockquote>
-          <blockquote class="speech-bubble speech-bubble--thought">
-            <p>"Painkillers kept me sane. The world kept trying to take that away."</p>
-          </blockquote>
-          <blockquote class="speech-bubble speech-bubble--speech">
-            <p>"The twin moons of my bloody past hung low and huge in the sky."</p>
-          </blockquote>
-          <blockquote class="speech-bubble speech-bubble--thought speech-bubble--wide">
-            <p>"I had a dream of my wife. She was pregnant, and I was scared. It was a good dream. Then I woke up."</p>
-          </blockquote>
+        <h2 class="section__title"><span class="panel-num">03</span>MAXPAYNIZE</h2>
+        <div class="maxpaynizer">
+          <form id="maxpaynizer-form" class="maxpaynizer__form">
+            <label class="sr-only" for="maxpaynizer-input">Enter up to 20 characters</label>
+            <div class="maxpaynizer__controls">
+              <input id="maxpaynizer-input" name="text" type="text" maxlength="20" autocomplete="off" placeholder="Anything. 20 characters." required>
+              <button id="maxpaynizer-submit" class="btn maxpaynizer__button" type="submit">Maxpaynize It!</button>
+            </div>
+            <p id="maxpaynizer-quota" class="maxpaynizer__quota" aria-live="polite">Up to 5 Maxpaynizes per day.</p>
+          </form>
+          <div id="maxpaynizer-result" class="maxpaynizer__result" role="status" aria-live="polite" hidden></div>
+          <audio id="beretta-reload" preload="auto" src="assets/audio/beretta-reload.mp3"></audio>
+          <audio id="beretta-shot" preload="auto" src="assets/audio/beretta-shot.mp3"></audio>
         </div>
       </div>
     </section>

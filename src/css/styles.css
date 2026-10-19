@@ -464,6 +464,38 @@ img { max-width: 100%; height: auto; display: block; }
 .speech-bubble--thought::after, .speech-bubble--thought::before { display: none; }
 .speech-bubble--wide { grid-column: 1 / -1; }
 
+.maxpaynizer { max-width: 58rem; margin: 0 auto; }
+.maxpaynizer__controls { display: flex; align-items: stretch; gap: 0.8rem; }
+.maxpaynizer__controls input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  border: 3px solid var(--charcoal);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--vanilla-custard);
+  font: inherit;
+  font-size: 1.1rem;
+  box-shadow: var(--panel-shadow);
+}
+.maxpaynizer__controls input::placeholder { color: var(--charcoal-light); }
+.maxpaynizer__controls input:focus-visible { outline: 2px solid var(--amber-honey); outline-offset: 3px; }
+.maxpaynizer__button { cursor: pointer; font-family: var(--font-main); white-space: nowrap; }
+.maxpaynizer__button:disabled { cursor: not-allowed; opacity: 0.55; }
+.maxpaynizer__quota { margin: 0.8rem 0 0; color: var(--charcoal-light); font-size: 0.82rem; }
+.maxpaynizer__result {
+  margin-top: 2rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 3px solid var(--vanilla-custard);
+  background: rgba(217, 216, 159, 0.08);
+  box-shadow: var(--panel-shadow);
+}
+.maxpaynizer__quote { margin: 0; color: var(--amber-honey); font-size: clamp(1.25rem, 3vw, 2rem); font-style: italic; }
+.maxpaynizer__speaker { margin: 0.7rem 0 0; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.maxpaynizer__reason { margin: 0.45rem 0 0; color: var(--charcoal-light); }
+.maxpaynizer__result[data-error="true"] { border-color: var(--brick-red); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
 /* ---------- Artwork ---------- */
 
 .artwork__frame {
@@ -506,6 +538,7 @@ img { max-width: 100%; height: auto; display: block; }
   .saga__grid, .games__grid, .quotes__grid { grid-template-columns: 1fr; }
   .game-card--wide { grid-column: auto; flex-direction: column; }
   .speech-bubble--wide, .comic-panel--wide { grid-column: auto; }
+  .maxpaynizer__controls { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {

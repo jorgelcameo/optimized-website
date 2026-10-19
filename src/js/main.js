@@ -161,6 +161,132 @@
 
   /* ================= CACHE STATUS ================= */
 
+  /* ================= MAXPAYNIZER ================= */
+
+  const maxpaynizerForm = document.getElementById("maxpaynizer-form");
+  const maxpaynizerInput = document.getElementById("maxpaynizer-input");
+  const maxpaynizerButton = document.getElementById("maxpaynizer-submit");
+  const maxpaynizerResult = document.getElementById("maxpaynizer-result");
+  const maxpaynizerQuota = document.getElementById("maxpaynizer-quota");
+  const quoteApiBase = (
+    document.querySelector('meta[name="quote-api-url"]')?.content || ""
+  ).replace(/\/+$/, "");
+  const reloadSound = document.getElementById("beretta-reload");
+  const shotSound = document.getElementById("beretta-shot");
+  let remainingUses = null;
+
+  function playSound(audio) {
+    if (!audio) return;
+    audio.volume = 0.35;
+    audio.currentTime = 0;
+    const playback = audio.play();
+    if (playback) playback.catch(() => {});
+  }
+
+  function formatWait(seconds) {
+    const minutes = Math.max(1, Math.ceil(seconds / 60));
+    if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+    const hours = Math.ceil(minutes / 60);
+    return `${hours} hour${hours === 1 ? "" : "s"}`;
+  }
+
+  function updateQuota(quota) {
+    if (!quota) return;
+    remainingUses = quota.remaining;
+    maxpaynizerButton.disabled = remainingUses <= 0;
+    if (remainingUses > 0) {
+      maxpaynizerQuota.textContent = `${remainingUses} of ${quota.limit} Maxpaynizes available this window.`;
+    } else {
+      maxpaynizerQuota.textContent = `No Maxpaynizes left. Try again in ${formatWait(quota.resetInSeconds)}.`;
+    }
+  }
+
+  async function refreshQuota() {
+    const response = await fetch(`${quoteApiBase}/quota`, { headers: { Accept: "application/json" } });
+    if (!response.ok) throw new Error("quota unavailable");
+    const data = await response.json();
+    updateQuota(data.quota);
+  }
+
+  function showMaxpaynizerResult({ quote, speaker, source, reason }, isError = false) {
+    maxpaynizerResult.replaceChildren();
+    maxpaynizerResult.hidden = false;
+    maxpaynizerResult.dataset.error = String(isError);
+
+    const quoteEl = document.createElement("p");
+    quoteEl.className = "maxpaynizer__quote";
+    quoteEl.textContent = quote ? `“${quote}”` : reason || "No close match in the current collection.";
+    maxpaynizerResult.append(quoteEl);
+
+    if (speaker) {
+      const speakerEl = document.createElement("p");
+      speakerEl.className = "maxpaynizer__speaker";
+      speakerEl.textContent = `— ${speaker}${source ? ` · ${source}` : ""}`;
+      maxpaynizerResult.append(speakerEl);
+    }
+
+    if (quote && reason) {
+      const reasonEl = document.createElement("p");
+      reasonEl.className = "maxpaynizer__reason";
+      reasonEl.textContent = reason;
+      maxpaynizerResult.append(reasonEl);
+    }
+  }
+
+  if (maxpaynizerForm) {
+    maxpaynizerButton.disabled = true;
+    if (!quoteApiBase) {
+      maxpaynizerQuota.textContent = "The quote service is not configured.";
+    } else {
+      refreshQuota()
+        .catch(() => {
+          maxpaynizerQuota.textContent = "Could not check the quota. The server will check it when you submit.";
+          maxpaynizerButton.disabled = false;
+        });
+    }
+
+    maxpaynizerButton.addEventListener("pointerenter", () => playSound(reloadSound));
+    maxpaynizerButton.addEventListener("focus", () => playSound(reloadSound));
+    maxpaynizerForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!quoteApiBase || maxpaynizerButton.disabled) return;
+
+      playSound(shotSound);
+      maxpaynizerButton.disabled = true;
+      maxpaynizerButton.textContent = "SEARCHING…";
+      showMaxpaynizerResult({ quote: "Searching the streets…" });
+
+      try {
+        const response = await fetch(`${quoteApiBase}/quote`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ text: maxpaynizerInput.value.trim() }),
+        });
+        const data = await response.json();
+        if (data.quota) updateQuota(data.quota);
+        if (response.status === 429) {
+          showMaxpaynizerResult({
+            quote: `Out of Maxpaynizes. Try again in ${formatWait(data.quota?.resetInSeconds || 0)}.`,
+          }, true);
+        } else if (!response.ok) {
+          showMaxpaynizerResult({ quote: data.error || "The quote service hit a snag. Try again later." }, true);
+        } else {
+          showMaxpaynizerResult(data.match || {});
+        }
+      } catch (_) {
+        showMaxpaynizerResult({ quote: "Could not reach the quote service. Try again later." }, true);
+        try {
+          await refreshQuota();
+        } catch (_) {
+          maxpaynizerButton.disabled = false;
+        }
+      } finally {
+        maxpaynizerButton.disabled = remainingUses !== null && remainingUses <= 0;
+        maxpaynizerButton.textContent = "Maxpaynize It!";
+      }
+    });
+  }
+
   const statusEl = document.getElementById("cache-status");
   async function updateCacheStatus() {
     if (!("serviceWorker" in navigator) || !caches) {
