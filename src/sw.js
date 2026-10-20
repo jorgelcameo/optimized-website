@@ -11,7 +11,7 @@
  *
  * Bump CACHE_VERSION when assets change. */
 
-const CACHE_VERSION = "v5";
+const CACHE_VERSION = "v6";
 const CACHE_NAME = `max-payne-fan-${CACHE_VERSION}`;
 
 const PRECACHE_ASSETS = [
@@ -21,21 +21,22 @@ const PRECACHE_ASSETS = [
   "js/main.js",
   "assets/fonts/max-payne-logo.woff2",
   "assets/fonts/space-grotesk-latin.woff2",
+  "assets/images/max-payne-hero-400.webp",
+  "assets/images/max-payne-hero-800.webp",
+  "assets/images/max-payne-hero-1600.webp",
+  "assets/images/max-payne-hero-800.jpg",
+  "assets/images/max-payne-hero-1600.jpg",
   "assets/images/max-payne-1-keyart-400.webp",
   "assets/images/max-payne-1-keyart-800.webp",
-  "assets/images/max-payne-1-keyart-1600.webp",
   "assets/images/max-payne-1-keyart-800.jpg",
-  "assets/images/max-payne-1-keyart-1600.jpg",
   "assets/images/max-payne-2-keyart-400.webp",
   "assets/images/max-payne-2-keyart-800.webp",
-  "assets/images/max-payne-2-keyart-1600.webp",
   "assets/images/max-payne-2-keyart-800.jpg",
-  "assets/images/max-payne-2-keyart-1600.jpg",
-  "assets/images/max-payne-3-keyart-400.webp",
-  "assets/images/max-payne-3-keyart-800.webp",
-  "assets/images/max-payne-3-keyart-1600.webp",
-  "assets/images/max-payne-3-keyart-800.jpg",
-  "assets/images/max-payne-3-keyart-1600.jpg",
+  "assets/images/max-payne-3-keyart-v2-400.webp",
+  "assets/images/max-payne-3-keyart-v2-800.webp",
+  "assets/images/max-payne-3-keyart-v2-1600.webp",
+  "assets/images/max-payne-3-keyart-v2-800.jpg",
+  "assets/images/max-payne-3-keyart-v2-1600.jpg",
   "assets/images/max-payne-artwork-400.webp",
   "assets/images/max-payne-artwork-800.webp",
   "assets/images/max-payne-artwork-1600.webp",
