@@ -11,7 +11,7 @@
  *
  * Bump CACHE_VERSION when assets change. */
 
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const CACHE_NAME = `max-payne-fan-${CACHE_VERSION}`;
 
 const PRECACHE_ASSETS = [
